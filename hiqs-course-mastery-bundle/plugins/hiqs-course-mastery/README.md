@@ -48,7 +48,7 @@ HIQS_RUNTIME="$HOME/Library/Application Support/HIQS Course Mastery/0.2.0/venv"
 
 > 给我这章的知识地图和讲义页码，然后出一道练习题，等我答完再讲。
 
-[教学 Skill](prompt/course-mastery-coach/SKILL.md) · [复制完整教学提示词](../../../docs/Course-Mastery-Coach-Prompt.md)
+[教学 Skill](prompt/course-mastery-coach/SKILL.md) · [复制完整教学提示词](https://github.com/Jerry6921/HKU-Learning-Plugin-For-Codex/blob/main/docs/Course-Mastery-Coach-Prompt.md)
 
 ## 定时检查
 

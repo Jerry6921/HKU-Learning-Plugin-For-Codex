@@ -4,6 +4,11 @@ HIQS 的产品主体是 `skills/` 中的 AI Skill Set。Skills 负责意图解�
 任务编排和内容写作；Notion 是主要可视化与资料展示端；Python 只提供这些工作流共用的
 确定性服务。服务通过 `HIQSPort` 暴露，MCP 是 Agent 调用服务的正式适配器。
 
+## 分发入口
+
+仓库根目录的 HIQS Python 包提供完整 MCP profiles 和 CLI。
+Codex 本机插件在 `hiqs-course-mastery-bundle/`，自带 Moodle、资料读取、Apple 同步以及教学与定时提示词。两者沿用同一套课程事实与本机资料格式。共享实现由根目录维护，插件保留独立的装配和入口。[分发架构决策](docs/adr/0003-standalone-codex-plugin.md)
+
 ## 产品结构与职责
 
 ```text

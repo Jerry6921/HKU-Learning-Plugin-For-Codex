@@ -30,7 +30,7 @@ def test_local_and_ci_require_the_same_coverage() -> None:
 
 def test_local_gate_runs_the_lint_and_test_steps_ci_runs() -> None:
     assert '"check", "src", "tests", "scripts"' in GATE, "local lint targets changed"
-    assert "ruff check src tests scripts" in WORKFLOW, "CI lint targets changed"
+    assert "python scripts/check_all.py --fast" in WORKFLOW, "CI no longer uses the local gate"
     assert '"pytest"' in GATE and "pytest" in WORKFLOW
     assert "no:cacheprovider" in GATE and "no:cacheprovider" in WORKFLOW
 

@@ -20,7 +20,7 @@ belong outside `skills/`. The packager includes every non-hidden resource,
 excluding Python bytecode, and rejects symlinks inside distribution sources.
 Validate changed Skills with the skill-creator quick validator when available.
 
-After each completed development task and its checks, install the current
+After changing `skills/` and completing its checks, install the current
 product Skills into the local Agent environment:
 
 ```bash
@@ -45,20 +45,33 @@ python -m pip install -c requirements.lock -e '.[dev]'
 python scripts/check_all.py
 ```
 
-`scripts/check_all.py` is the single gate: lint, both contract snapshots compared in
-memory, and the default suite.
+`scripts/check_all.py` runs lint, checks contract snapshots and the Codex bundle,
+and runs the offline test suite.
 
 Preserve the dependency direction documented in `ARCHITECTURE.md`. Collector
 changes require download-coverage, last-known-good and failure-path tests.
 Information changes require strict-schema, atomic-upsert, and data-preservation tests;
 calendar changes require API and browser-level rendering checks.
 
-Pull requests package the product Skills, run the Python suite and wheel build,
-and retain frontend typecheck/component tests/build and generated-bundle drift
-checks for the compatibility client.
+## Working on the Codex plugin
+
+Edit plugin prompts under `hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/prompt/`.
+Edit shared program files at their canonical repository paths, then refresh the
+plugin mirrors. Stage any new bundle files before packaging.
+
+```sh
+python scripts/package_codex_plugin.py --sync
+python scripts/check_all.py
+python scripts/package_codex_plugin.py --output dist/hiqs-course-mastery.zip
+```
+
+CI packages the standalone plugin and general HIQS skills, tests the Python
+package, and checks the wheel. See [the distribution ADR](docs/adr/0003-standalone-codex-plugin.md).
+
+## Code layout
 
 Place code under the architectural `hsas/domain`, `hsas/application`,
-`hsas/infrastructure`, `hsas/core`, `hsas/cli`, `hsas/web`, `hsas/mcp`, or
+`hsas/infrastructure`, `hsas/core`, `hsas/cli`, `hsas/viewer`, `hsas/mcp`, or
 `hsas/codegen` hierarchy. Use responsibility-oriented, lowercase snake_case module
 names such as `material_search.py`, `change_tracking.py`, `course_publisher.py`, or
 `session_store.py`. Generic action prefixes such as `define_`, `manage_`, `build_`,

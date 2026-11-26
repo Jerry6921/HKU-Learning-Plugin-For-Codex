@@ -1,6 +1,6 @@
 # Issue tracker: GitHub
 
-Issues and specs for HIQS live as GitHub issues in `Jerry6921/HSAS`. Use the `gh` CLI for tracker operations, run from this repository or pass `--repo Jerry6921/HSAS` where supported. The authenticated account must have the permissions required by the operation.
+Issues and specs for HIQS live as GitHub issues in `Jerry6921/HKU-Learning-Plugin-For-Codex`. Use the `gh` CLI for tracker operations, run from this repository or pass `--repo Jerry6921/HKU-Learning-Plugin-For-Codex` where supported. The authenticated account must have the permissions required by the operation.
 
 ## Conventions
 

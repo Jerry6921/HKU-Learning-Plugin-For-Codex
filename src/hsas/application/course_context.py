@@ -202,5 +202,3 @@ def _item_date_key(item: InformationItem) -> str:
         item.recurrence.valid_from if item.recurrence else None,
     ]
     return min((value.isoformat() for value in candidates if value is not None), default="9999")
-
-

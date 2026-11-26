@@ -15,14 +15,13 @@ from urllib.request import Request, urlopen
 from hsas import __version__
 
 
-GITHUB_REPOSITORY_URL = "https://github.com/Jerry6921/HSAS"
-REMOTE_VERSION_URL = (
-    "https://raw.githubusercontent.com/Jerry6921/HSAS/main/src/hsas/__init__.py"
-)
+GITHUB_REPOSITORY = "Jerry6921/HKU-Learning-Plugin-For-Codex"
+GITHUB_REPOSITORY_URL = f"https://github.com/{GITHUB_REPOSITORY}"
+REMOTE_VERSION_URL = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/main/src/hsas/__init__.py"
 SUPPORTED_ORIGINS = {
-    "https://github.com/Jerry6921/HSAS.git",
-    "git@github.com:Jerry6921/HSAS.git",
-    "ssh://git@github.com/Jerry6921/HSAS.git",
+    f"{prefix}{repository}.git"
+    for repository in (GITHUB_REPOSITORY, "Jerry6921/HSAS")
+    for prefix in ("https://github.com/", "git@github.com:", "ssh://git@github.com/")
 }
 VERSION_PATTERN = re.compile(r"__version__\s*=\s*['\"]([0-9]+(?:\.[0-9]+){2})['\"]")
 COMMIT_PATTERN = re.compile(r"[0-9a-f]{40}")

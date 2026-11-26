@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Any
 from zoneinfo import ZoneInfo
 
-from hsas.application.notion_projection import expand_calendar, is_actionable
+from hsas.application.calendar_projection import expand_calendar, is_actionable
 from hsas.domain.information import InformationStore
 
 

@@ -23,6 +23,12 @@ jobs:
           python-version: "3.13"
       - name: Package product skills
         run: python scripts/package_agent_skills.py --output dist/hiqs-agent-skills.zip
+      - name: Package Codex plugin
+        run: python scripts/package_codex_plugin.py --output dist/hiqs-course-mastery.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hiqs-course-mastery
+          path: dist/hiqs-course-mastery.zip
       - uses: actions/upload-artifact@v4
         with:
           name: hiqs-agent-skills
@@ -50,10 +56,8 @@ jobs:
           python -m pip_audit -r requirements.lock
       - name: Verify SQLite FTS5
         run: python -c "import sqlite3; connection = sqlite3.connect(':memory:'); connection.execute('CREATE VIRTUAL TABLE probe USING fts5(content)')"
-      - name: Lint
-        run: python -m ruff check src tests scripts
-      - name: Verify Agent contract snapshots
-        run: python scripts/generate_agent_contracts.py && git diff --exit-code -- contracts
+      - name: Verify source, contracts and plugin
+        run: python scripts/check_all.py --fast
       # Coverage varies slightly between interpreter versions, so the threshold is
       # enforced on exactly one leg. Every supported version still runs the suite.
       - name: Test

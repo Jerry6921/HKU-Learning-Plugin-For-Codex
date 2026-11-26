@@ -4,9 +4,18 @@ HIQS is an AI Skill Set. Skills own task orchestration, interpretation and
 authorship; Notion is the primary workspace for visualization and materials;
 Python provides reusable deterministic services through `HIQSPort` and MCP.
 
-## Product skills
+## Distributions
 
-The canonical product skills live in `skills/`. `.agents/skills/` links to those
+The general HIQS package lives in `src/hsas/`. The standalone Codex plugin
+lives in `hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/`. Its
+`prompt/` contains Codex workflows, course coaching, and scheduled check
+instructions. The plugin's `program/` contains shared mirrors and files
+owned by the plugin. See [the distribution ADR](docs/adr/0003-standalone-codex-plugin.md)
+before editing program files.
+
+## General HIQS skills
+
+The canonical general HIQS skills live in `skills/`. `.agents/skills/` links to those
 directories for repository use; edit the canonical files rather than copies.
 
 - Course facts, timetables, assessments, source review and cited questions:
@@ -51,15 +60,15 @@ an assumption, not a fact.
 
 ### Complete development
 
-After each authorized HIQS development task, finish its checks, then run
-`python scripts/install_agent_skills.py` to install/update all product Skills
+When a development task changes `skills/`, finish its checks, then run
+`python scripts/install_agent_skills.py` to update the general HIQS skills
 in the local Agent environment. This is the user's standing instruction; do not
 ask again for routine installation. Verify the returned installation report
 before reporting completion. The detailed procedure is in the engineering Skill.
 
 ### Issue tracker
 
-Use GitHub Issues in `Jerry6921/HSAS`; before ticket operations, read `docs/agents/issue-tracker.md`.
+Use GitHub Issues in `Jerry6921/HKU-Learning-Plugin-For-Codex`; before ticket operations, read `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 

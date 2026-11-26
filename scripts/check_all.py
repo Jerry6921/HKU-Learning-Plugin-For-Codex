@@ -90,12 +90,15 @@ def main() -> int:
     parser.add_argument(
         "--fast",
         action="store_true",
-        help="skip the test suite; lint and contract gates still run",
+        help="skip the test suite; lint, contracts, and the plugin check still run",
     )
     args = parser.parse_args()
 
     results = {
-        "lint": _run("Lint", [PY, "-m", "ruff", "check", "src", "tests", "scripts"]),
+        "lint": _run(
+            "Lint", [PY, "-m", "ruff", "check", "src", "tests", "scripts", "hiqs-course-mastery-bundle"]
+        ),
+        "plugin": _run("Codex plugin", [PY, "scripts/package_codex_plugin.py", "--check"]),
     }
     results.update({f"contract[{index}]": ok for index, ok in enumerate(_contract_checks())})
     if not args.fast:

@@ -29,7 +29,7 @@ sits in the adapters under `src/hsas/infrastructure/`, not in the domain model.
   schema first, regenerate, then implement against it.
 - Never hand-edit generated files. `python scripts/generate_agent_contracts.py` plus
   `git diff --exit-code -- contracts` must stay clean; CI enforces it, and
-  `scripts/check_all.py` compares both snapshots in memory before committing.
+  `scripts/check_all.py` compares all committed snapshots in memory before committing.
 - A new MCP tool needs a schema entry in the same change. If a tool cannot be described
   in the contract, the tool is not designed yet.
 

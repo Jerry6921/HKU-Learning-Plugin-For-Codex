@@ -17,12 +17,14 @@ def _completed(args: list[str], output: str = "", returncode: int = 0):
     return subprocess.CompletedProcess(args, returncode, stdout=output)
 
 
-def test_update_status_reports_available_for_safe_checkout(tmp_path: Path) -> None:
+@pytest.mark.parametrize("origin", [OFFICIAL_ORIGIN,
+    "https://github.com/Jerry6921/HKU-Learning-Plugin-For-Codex.git\n"])
+def test_update_status_reports_available_for_safe_checkout(tmp_path: Path, origin: str) -> None:
     (tmp_path / ".git").mkdir()
 
     def runner(args: list[str], _cwd: Path, _timeout: int):
         if args == ["git", "remote", "get-url", "origin"]:
-            return _completed(args, OFFICIAL_ORIGIN)
+            return _completed(args, origin)
         if args[:2] == ["git", "status"]:
             return _completed(args)
         if args[:2] == ["git", "ls-remote"]:
