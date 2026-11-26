@@ -1,8 +1,23 @@
 # HKU Learning Plugin For Codex
 
-把 HKU Moodle 课件同步到 Mac，在 Codex 里查课程要求、复习讲义，并把已确认的截止日期同步到 Apple 提醒事项和日历。
+用 HKU Moodle 课件在 Codex 里学一门课，再把需要完成的事汇总成清单。插件自带 **Course Mastery Coach** 和 **定时检查**，可以按课件辅导，也可以安排定期同步和提醒。
 
-[完整安装指南](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/README.md) · [Course Mastery 提示词](docs/Course-Mastery-Coach-Prompt.md) · [软件许可](LICENSE)
+[快速开始](#快速开始) · [完整安装指南](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/README.md) · [软件许可](LICENSE)
+
+## Course Mastery Coach
+
+从本学期讲义、教程和考核资料出发。可以先生成一张带课件出处的知识地图，再按章节讲解。每次练习先出题，等你独立作答后再指出关键错误，安排变式题和隔时复测。想深入一节时，也可以请教练推荐对应的 Moodle 阅读。
+
+> 用这章讲义给我一张知识地图，标出关键页码。先出一道应用题，等我答完再讲。
+
+[教学 Skill](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/prompt/course-mastery-coach/SKILL.md) · [复制完整教学提示词](docs/Course-Mastery-Coach-Prompt.md)
+
+## 定时检查与截止事项
+
+- **每天一次**静默同步 Moodle。发现新增作业、测验、考试等需要处理的事项时，当次通知并附来源。没有新增事项时保持静默。
+- **每周一次**汇总截止日期已确认、且核实仍未完成的事项。逾期事项排在前面，每条附课程、截止时间和来源。
+
+安装后可在宿主中分别设置每日和每周的触发时间。每周汇总需要读取 Apple 提醒事项的完成状态。无法核实的项会标明状态待核实。[定时检查 Skill](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/prompt/hiqs-scheduled-review/SKILL.md)
 
 ## 快速开始
 
@@ -28,16 +43,9 @@ HIQS_RUNTIME="$HOME/Library/Application Support/HIQS Course Mastery/0.2.0/venv"
 
 > 同步这门课的 Moodle 资料。找出下一份作业的截止时间、占分和提交要求，附上我能回查的出处。
 
-## 能做什么
+## 查课件与同步 Apple 日程
 
-| 工作流 | 使用示例 |
-| --- | --- |
-| **查课程资料** | 找出小测范围，列出相关讲义和页码。 |
-| **Course Mastery 辅导** | 根据讲义画一张知识地图，出一道应用题，等我答完再反馈。 |
-| **同步 Apple 日程** | 预览已确认的待办和日程，再同步到专用 HIQS 列表。 |
-| **定时检查** | 每天静默同步 Moodle，有新增事项就通知。每周汇总截止日期已确认且仍未完成的事项。 |
-
-Apple 接入需要 macOS 14 或更新版本、Swift 工具链和系统授权。每日检查和每周汇总由宿主定时任务触发。每周汇总需要读取提醒事项的完成状态。[Apple 接入说明](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/program/docs/apple-integration.md) · [定时检查提示词](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/prompt/hiqs-scheduled-review/SKILL.md)
+也可以直接查小测范围、作业占分和提交要求，或预览并同步已确认的待办和日程。Apple 接入需要 macOS 14 或更新版本、Swift 工具链和系统授权。[Apple 接入说明](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/program/docs/apple-integration.md)
 
 ## 课程规划
 

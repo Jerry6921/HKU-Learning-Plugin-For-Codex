@@ -42,17 +42,20 @@ HIQS_RUNTIME="$HOME/Library/Application Support/HIQS Course Mastery/0.2.0/venv"
 
 在 Codex 里先预览已确认事项，再按授权同步。插件使用专用 HIQS 日历和提醒事项列表，写入后在本机读回核对。[Apple 接入和同步规则](program/docs/apple-integration.md)
 
-## 使用示例
+## Course Mastery Coach
 
-| 工作流 | 可以怎么问 |
-| --- | --- |
-| 查课件和考核 | 查这次小测的范围，列出对应讲义和页码。 |
-| Course Mastery 辅导 | 用这节课的讲义给我一张知识地图，再出一道应用题。等我答完再反馈。 |
-| 定时检查 | 每天静默同步一次，发现新增作业或测验时通知我。每周汇总已有明确截止日期且未完成的事项。 |
+用当前课程的讲义、教程和考核资料建立知识地图。教练会推荐相关 Moodle 阅读，给你题目独立作答，再根据失分点安排反馈和复测。
 
-定时检查由 Codex 或其他宿主的定时任务触发。每周汇总需要宿主能读取提醒事项的完成状态。无法核实时会标明缺口。[定时检查提示词](prompt/hiqs-scheduled-review/SKILL.md)
+> 给我这章的知识地图和讲义页码，然后出一道练习题，等我答完再讲。
 
-需要复制教学提示词时，可打开合并版 Markdown，里面包含主提示词及课程与考核参考。[Course Mastery Coach 提示词](../../../docs/Course-Mastery-Coach-Prompt.md)
+[教学 Skill](prompt/course-mastery-coach/SKILL.md) · [复制完整教学提示词](../../../docs/Course-Mastery-Coach-Prompt.md)
+
+## 定时检查
+
+1. 每日静默同步一次 Moodle，发现新增作业、测验等事项时，当次通知并附来源。
+2. 每周汇总已确认截止日期、且核实未完成的事项。优先列出逾期项。
+
+每日和每周任务分别由宿主触发。每周输出前核对 Apple 提醒事项的完成状态。无法核实时标明具体缺口。[定时检查 Skill](prompt/hiqs-scheduled-review/SKILL.md)
 
 ## 数据和目录
 
