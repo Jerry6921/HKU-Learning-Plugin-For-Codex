@@ -21,7 +21,7 @@
 
 ## 快速开始
 
-准备 macOS、Codex CLI、Python 3.11 或更新版本，以及能访问课程的 HKU 账户。当前锁定依赖已在 Python 3.14 上验证。
+准备 macOS、Codex CLI、Python 3.11.5 或更新版本，以及能访问课程的 HKU 账户。当前锁定依赖已在 Python 3.14 上验证。
 
 ```sh
 git clone https://github.com/Jerry6921/HKU-Learning-Plugin-For-Codex.git

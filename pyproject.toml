@@ -9,7 +9,7 @@ description = "Reusable local services for the HIQS AI Skill Set and Notion work
 readme = "README.md"
 license = "PolyForm-Noncommercial-1.0.0"
 license-files = ["LICENSE"]
-requires-python = ">=3.11"
+requires-python = ">=3.11.5"
 classifiers = [
   "Environment :: Console",
   "Operating System :: MacOS",
@@ -24,12 +24,14 @@ dependencies = [
   "certifi>=2024.2.2",
   "beautifulsoup4>=4.12,<5",
   "mcp>=2,<3",
+  "opentelemetry-api>=1.45.2,<2",
   "playwright>=1.48,<2",
   "platformdirs>=4.3,<5",
   "pydantic>=2.9,<3",
   "python-dotenv>=1,<2",
   "pypdf>=6,<7",
   "rich>=13.9,<16",
+  "soupsieve>=4.1.3,<5",
   "trafilatura>=2.0,<3",
   "typer>=0.12,<1",
 ]

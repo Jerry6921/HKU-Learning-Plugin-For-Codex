@@ -4,6 +4,22 @@ All notable changes to HIQS are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow
 Semantic Versioning.
 
+## [Unreleased]
+
+### Changed
+
+- The Codex bundle checks its shared program files against the canonical sources.
+  CI builds a standalone ZIP and verifies its declared MCP launcher.
+- The dependency audit runs separately from the Python test matrix, with
+  the same locked dependency file.
+
+### Fixed
+
+- The source updater accepts the current GitHub repository and its previous
+  origin URLs.
+- Updated Soup Sieve and OpenTelemetry API to patched versions. The minimum
+  Python patch version is now 3.11.5.
+
 ## [2.12.0] - 2026-11-02
 
 ### Added

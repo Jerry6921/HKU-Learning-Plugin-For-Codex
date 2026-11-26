@@ -6,7 +6,7 @@
 
 ## 快速开始
 
-准备 macOS、Codex CLI、Python 3.11 或更新版本，以及可访问课程的 HKU 账户。当前锁定依赖在 Python 3.14 上验证。
+准备 macOS、Codex CLI、Python 3.11.5 或更新版本，以及可访问课程的 HKU 账户。当前锁定依赖在 Python 3.14 上验证。
 
 ```sh
 git clone https://github.com/Jerry6921/HKU-Learning-Plugin-For-Codex.git
@@ -16,7 +16,7 @@ codex plugin marketplace add .
 codex plugin add hiqs-course-mastery@hiqs-local
 ```
 
-使用 ZIP 时，从解压目录执行最后三个命令。安装完成后在 Codex 打开新聊天。
+使用 ZIP 时，从解压目录执行最后三个命令。更新已有安装时，在新版目录再次运行 `--setup`，重新安装锁定的 Python 依赖。安装完成后在 Codex 打开新聊天。
 
 ### 连接 Moodle
 
