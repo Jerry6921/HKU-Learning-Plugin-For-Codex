@@ -1,5 +1,7 @@
 # Contributing
 
+Jerry6921 maintains the project. OpenAI Codex assisted with the Codex plugin architecture, implementation, and testing.
+
 HIQS is an AI Skill Set with Notion as its primary workspace. Edit product
 workflows and authored guidance in `skills/<skill>/`; add reusable deterministic
 capabilities to the existing Python services through `HIQSPort`. Keep the MCP
