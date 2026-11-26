@@ -1,4 +1,12 @@
-# HIQS · HKU Information Query System
+# HKU Learning Plugin For Codex
+
+面向香港大学学生的 Codex 本机插件。同步 Moodle 课件、按出处查考核要求、用 Course Mastery 复习，也能把已确认的课程截止日期同步到 Apple 提醒事项与日历。
+
+## Codex 插件
+
+插件位于 `hiqs-course-mastery-bundle/`。在 macOS 上安装后，可以询问「这次小测考哪些讲义？给我对应页码，再出一道练习题。」宿主也可以定时触发每日 Moodle 检查和每周未完成截止事项汇总。[安装、连接与使用示例](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/README.md)
+
+## HIQS 原有工作流
 
 HIQS 帮助香港大学学生把 Moodle 课件、SIS 课程信息和 Class Planner 课表整理成可查证的学习资料。你可以问「这份作业什么时候交、占多少分、要求在哪里写的？」，也可以用同一批资料制作复习笔记、规划班别组合，或把已确认的截止日期加入 Apple 日历和提醒事项。
 
@@ -18,8 +26,8 @@ AI Agent 按 Skill 阅读和解释资料。Python 服务负责下载、检索、
 准备 Python 3.11 或更新版本（需支持 SQLite FTS5），以及支持本地 stdio MCP 的 Agent。访问 HKU 受限资料时，需要有资料访问权限的 HKU 账户。
 
 ```bash
-git clone https://github.com/Jerry6921/HSAS.git
-cd HSAS
+git clone https://github.com/Jerry6921/HKU-Learning-Plugin-For-Codex.git
+cd HKU-Learning-Plugin-For-Codex
 python3 -m venv .venv
 .venv/bin/python -m pip install -c requirements.lock -e .
 .venv/bin/python scripts/install_agent_skills.py

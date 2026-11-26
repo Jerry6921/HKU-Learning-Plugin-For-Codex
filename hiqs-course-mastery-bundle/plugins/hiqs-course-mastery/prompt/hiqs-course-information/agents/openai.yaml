@@ -1,0 +1,4 @@
+interface:
+  display_name: "HIQS Course Information"
+  short_description: "Sync and read Moodle materials or review the Apple projection"
+  default_prompt: "Check the local Moodle materials for this course and cite the supporting file or activity."
