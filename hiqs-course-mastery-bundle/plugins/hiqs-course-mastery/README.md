@@ -52,6 +52,8 @@ HIQS_RUNTIME="$HOME/Library/Application Support/HIQS Course Mastery/0.2.0/venv"
 
 定时检查由 Codex 或其他宿主的定时任务触发。每周汇总需要宿主能读取提醒事项的完成状态。无法核实时会标明缺口。[定时检查提示词](prompt/hiqs-scheduled-review/SKILL.md)
 
+需要复制教学提示词时，可打开合并版 Markdown，里面包含主提示词及课程与考核参考。[Course Mastery Coach 提示词](../../../docs/Course-Mastery-Coach-Prompt.md)
+
 ## 数据和目录
 
 Moodle 快照、浏览器登录状态、课程事实库和 Apple 回执存放在本机。默认资料目录是 `~/Library/Application Support/HSAS`。使用自定义目录时，让 Codex 和登录命令读取同一个 `HSAS_DATA_DIR`。已有 HIQS 资料和 Apple 配置沿用原有 JSON 格式。
