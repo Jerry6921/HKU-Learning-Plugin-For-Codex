@@ -9,6 +9,11 @@ from hsas.application.calendar_projection import expand_calendar, is_actionable
 from hsas.domain.information import InformationStore
 
 
+def reminder_identity(namespace: str, item_id: str) -> str:
+    """Return the stable Apple identity for one canonical course item."""
+    return f"{namespace}/reminder/{sha256(item_id.encode()).hexdigest()}"
+
+
 def build_apple_projection(store: InformationStore, namespace: str,
                            previous: dict[str, Any] | None = None,
                            *, now: datetime | None = None) -> dict[str, Any]:
@@ -49,7 +54,7 @@ def build_apple_projection(store: InformationStore, namespace: str,
             if not due or not upcoming(due):
                 expired_reminders += bool(due)
                 continue
-            reminders.append({"identity": f"{namespace}/reminder/{sha256(item.item_id.encode()).hexdigest()}",
+            reminders.append({"identity": reminder_identity(namespace, item.item_id),
                               "title": f"{course.code} · {item.title}", "due": due,
                               "notes": notes, "url": url})
     dates = [datetime.fromisoformat(row["start"]).replace(tzinfo=None).date() for row in events]

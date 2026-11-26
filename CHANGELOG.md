@@ -6,6 +6,11 @@ Semantic Versioning.
 
 ## [Unreleased]
 
+### Added
+
+- The Codex plugin can read completion for individual HIQS reminders by
+  canonical course item ID. The weekly prompt uses this read-only tool.
+
 ### Changed
 
 - The Codex bundle checks its shared program files against the canonical sources.

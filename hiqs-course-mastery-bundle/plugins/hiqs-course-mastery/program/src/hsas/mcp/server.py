@@ -129,6 +129,11 @@ def build_mcp_server(port: HIQSCore) -> MCPServer:
         return port.apple.projection()
 
     @tool
+    def get_apple_reminder_completion(item_ids: list[str]) -> dict:
+        """Read completion for canonical HIQS item IDs. Null means unverified."""
+        return port.apple.reminder_completion(item_ids)
+
+    @tool
     def sync_apple(confirmed: bool = False) -> dict:
         """Write the confirmed projection to the dedicated HIQS containers and read it back."""
         if not confirmed:

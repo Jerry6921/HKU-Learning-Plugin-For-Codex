@@ -17,7 +17,7 @@
 - **每天一次**静默同步 Moodle。发现新增作业、测验、考试等需要处理的事项时，当次通知并附来源。没有新增事项时保持静默。
 - **每周一次**汇总截止日期已确认、且核实仍未完成的事项。逾期事项排在前面，每条附课程、截止时间和来源。
 
-安装后可在宿主中分别设置每日和每周的触发时间。每周汇总需要读取 Apple 提醒事项的完成状态。无法核实的项会标明状态待核实。[定时检查 Skill](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/prompt/hiqs-scheduled-review/SKILL.md)
+安装后可在宿主中分别设置每日和每周的触发时间。每周汇总通过插件的只读工具核对 Apple 提醒事项的完成状态。无法核实的项会标明状态待核实。[定时检查 Skill](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/prompt/hiqs-scheduled-review/SKILL.md)
 
 ## 快速开始
 

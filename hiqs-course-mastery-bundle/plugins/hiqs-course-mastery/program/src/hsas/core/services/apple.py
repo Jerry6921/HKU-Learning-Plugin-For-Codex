@@ -10,7 +10,7 @@ from typing import Any
 from collections.abc import Callable
 from uuid import UUID, uuid4
 
-from hsas.application.apple_projection import build_apple_projection
+from hsas.application.apple_projection import build_apple_projection, reminder_identity
 from hsas.application.ports.apple import AppleCalendarGateway
 from hsas.core.ports import HIQSPortError
 from hsas.infrastructure.apple.client import NativeAppleGateway
@@ -92,6 +92,42 @@ class AppleDeliveryService:
                 return self._gateway().execute({"operation": "inventory"})
         except (OSError, ValueError, subprocess.SubprocessError) as exc:
             raise HIQSPortError(str(exc)) from exc
+
+    def reminder_completion(self, item_ids: list[str]) -> dict[str, Any]:
+        """Read completion for the requested HIQS items without changing Apple state."""
+        if any(not item_id.strip() for item_id in item_ids):
+            raise ValueError("item_ids must contain non-empty canonical item IDs")
+        items = {item_id: {"completed": None, "source": None} for item_id in item_ids}
+        if not items:
+            return {"status": "ready", "items": items}
+        try:
+            with self._lock():
+                config = self._config(required=False)
+                if not config:
+                    return {"status": "not_configured", "items": items}
+                by_id = {
+                    item_id: reminder_identity(config["namespace"], item_id) for item_id in item_ids
+                }
+                receipt = self._gateway().execute({
+                    "operation": "reminder-completion",
+                    "config": config,
+                    "identities": list(by_id.values()),
+                })
+        except (OSError, ValueError, subprocess.SubprocessError) as exc:
+            raise HIQSPortError(str(exc)) from exc
+
+        rows = {row["identity"]: row for row in receipt.get("items", [])}
+        for item_id, identity in by_id.items():
+            row = rows.get(identity, {})
+            completed, source = row.get("completed"), row.get("source")
+            observed = isinstance(completed, bool) and source in {"reminders", "archive"}
+            items[item_id] = {
+                "completed": completed if observed else None,
+                "source": source if observed else None,
+            }
+        return {"status": receipt["status"], "items": items, **(
+            {"reason": receipt["reason"]} if "reason" in receipt else {}
+        )}
 
     def synchronize(self) -> dict[str, Any]:
         # Hold the process lock while saving both success and failure receipts;

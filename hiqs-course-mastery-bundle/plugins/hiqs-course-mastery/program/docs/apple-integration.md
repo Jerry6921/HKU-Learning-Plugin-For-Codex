@@ -51,3 +51,7 @@ item 的日期更正并重新符合条件时恢复个人状态。删除后逐项
 [事件与提醒事项创建](https://developer.apple.com/documentation/eventkit/creating-events-and-reminders)、
 [local ID 在完整同步后可能失效](https://developer.apple.com/documentation/eventkit/ekcalendaritem/calendaritemidentifier)、
 [四年 predicate 范围限制](https://developer.apple.com/documentation/eventkit/ekeventstore/predicateforevents(withstart:end:calendars:))。
+
+## 每周汇总读取
+
+`get_apple_reminder_completion` 接收课程事实里的 `item_id`。它使用现有 HIQS 身份从已配置的提醒事项列表读取完成状态，并用已有归档核对由 HIQS 移出且无现存记录 ID 的提醒事项。实时结果优先。相同身份的记录冲突、缺少权限或找不到证据时，返回未知状态供周报标注。

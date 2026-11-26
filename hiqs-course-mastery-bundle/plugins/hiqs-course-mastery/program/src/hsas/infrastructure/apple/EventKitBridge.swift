@@ -398,6 +398,65 @@ func synchronize(_ store: EKEventStore, request: [String: Any]) async throws -> 
             "account": ["calendar": eventSource.title, "reminders": reminderSource.title]]
 }
 
+func completionRows(
+    _ identities: [String],
+    live: [String: EKReminder],
+    archived: [String: [String: Any]]
+) -> [[String: Any]] {
+    identities.map { key in
+        if let reminder = live[key] {
+            return ["identity": key, "completed": reminder.isCompleted, "source": "reminders"]
+        }
+        if let completed = archived[key]?["completed"] as? Bool {
+            return ["identity": key, "completed": completed, "source": "archive"]
+        }
+        return ["identity": key, "completed": NSNull(), "source": NSNull()]
+    }
+}
+
+@MainActor
+func readReminderCompletion(_ store: EKEventStore, request: [String: Any]) async throws -> [String: Any] {
+    guard EKEventStore.authorizationStatus(for: .reminder) == .fullAccess else {
+        return ["status": "permission_required"]
+    }
+    let config = request["config"] as? [String: Any] ?? [:]
+    let namespace = try string(config, "namespace")
+    guard UUID(uuidString: namespace) != nil else { throw BridgeError("invalid_namespace") }
+    guard let identities = request["identities"] as? [String],
+          identities.allSatisfy({ $0.hasPrefix(namespace + "/reminder/") }) else {
+        throw BridgeError("invalid_reminder_identity")
+    }
+    guard let id = config["reminder_list_id"] as? String else {
+        return ["status": "list_not_configured"]
+    }
+    guard let list = store.calendar(withIdentifier: id),
+          list.allowedEntityTypes.contains(.reminder),
+          let sourceID = config["reminder_source_id"] as? String,
+          list.source.sourceIdentifier == sourceID else {
+        throw BridgeError("configured_container_unavailable")
+    }
+    let requested = Set(identities)
+    let known = (config["item_ids"] as? [String: String] ?? [:]).filter { requested.contains($0.key) }
+    let rows = try await reminders(store, list).filter { row in
+        identity(row, namespace: namespace, known: known).map { requested.contains($0) } ?? false
+    }
+    let live = try index(rows, namespace: namespace, known: known)
+    var archived: [String: [String: Any]] = [:]
+    var receipt: [String: Any] = ["status": "ready"]
+    if identities.contains(where: { live[$0] == nil && known[$0] == nil }) {
+        do {
+            // A retained native ID indicates an expected live reminder. Its
+            // absence must not resurrect an older copy of the completion state.
+            archived = try loadReminderArchive().filter { requested.contains($0.key) && known[$0.key] == nil }
+        } catch {
+            receipt["status"] = "partial"
+            receipt["reason"] = "completion_archive_unavailable"
+        }
+    }
+    receipt["items"] = completionRows(identities, live: live, archived: archived)
+    return receipt
+}
+
 @MainActor
 func execute(_ request: [String: Any]) async throws -> [String: Any] {
     let operation = try string(request, "operation")
@@ -421,9 +480,17 @@ func execute(_ request: [String: Any]) async throws -> [String: Any] {
         restorePersonalState(restored, from: reminderPersonalState(original))
         guard restored.isCompleted, restored.notes == "Personal note", restored.priority == 5,
               restored.alarms?.first?.relativeOffset == -1800 else { throw BridgeError("reminder_archive_restore_failed") }
-        return ["status": "passed", "checks": ["personal_notes", "date_only_reminder", "all_day_boundary", "point_event_duration", "filtered_task_personal_state"]]
+        let rows = completionRows(["live", "archived", "missing"], live: ["live": restored],
+                                  archived: ["live": ["completed": false], "archived": ["completed": false]])
+        guard rows[0]["completed"] as? Bool == true, rows[0]["source"] as? String == "reminders",
+              rows[1]["completed"] as? Bool == false, rows[1]["source"] as? String == "archive",
+              rows[2]["completed"] is NSNull else { throw BridgeError("completion_resolution_failed") }
+        return ["status": "passed", "checks": ["personal_notes", "date_only_reminder", "all_day_boundary", "point_event_duration", "filtered_task_personal_state", "reminder_completion"]]
     }
     let store = EKEventStore()
+    if operation == "reminder-completion" {
+        return try await readReminderCompletion(store, request: request)
+    }
     if operation == "authorize" {
         if EKEventStore.authorizationStatus(for: .event) == .notDetermined { _ = try await store.requestFullAccessToEvents() }
         if EKEventStore.authorizationStatus(for: .reminder) == .notDetermined { _ = try await store.requestFullAccessToReminders() }

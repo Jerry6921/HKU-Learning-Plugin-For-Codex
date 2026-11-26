@@ -1,6 +1,6 @@
 {
   "name": "hiqs-course-mastery",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Sync and read Moodle materials, deliver confirmed course facts to Apple Reminders and Calendar, and teach from course evidence.",
   "skills": "./prompt/",
   "mcpServers": "./.mcp.json",

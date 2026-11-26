@@ -225,7 +225,7 @@ def test_native_bridge_offline_date_boundaries_and_personal_notes(tmp_path):
     subprocess.run([str(binary), str(request), str(response)], check=True, capture_output=True, timeout=20)
     receipt = json.loads(response.read_text())
     assert receipt["status"] == "passed"
-    assert set(receipt["checks"]) == {"personal_notes", "date_only_reminder", "all_day_boundary", "point_event_duration", "filtered_task_personal_state"}
+    assert set(receipt["checks"]) == {"personal_notes", "date_only_reminder", "all_day_boundary", "point_event_duration", "filtered_task_personal_state", "reminder_completion"}
 
 
 def test_date_filter_handles_hong_kong_today_ongoing_events_and_offsets():
