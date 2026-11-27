@@ -8,6 +8,8 @@ Semantic Versioning.
 
 ### Added
 
+- The Codex plugin can review HKU Outlook course email alongside Moodle, on demand or in the daily check when authorized.
+
 - The Codex plugin can read completion for individual HIQS reminders by
   canonical course item ID. The weekly prompt uses this read-only tool.
 

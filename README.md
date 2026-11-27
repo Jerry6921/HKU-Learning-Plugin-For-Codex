@@ -14,7 +14,7 @@
 
 ## 定时检查与截止事项
 
-- **每天一次**静默同步 Moodle。发现新增作业、测验、考试等需要处理的事项时，当次通知并附来源。没有新增事项时保持静默。
+- **每天一次**静默同步 Moodle，并按任务授权查阅已连接的 HKU 邮箱。发现新增作业、测验、考试等需要处理的事项时，当次通知并附来源。没有新增事项时保持静默。
 - **每周一次**汇总截止日期已确认、且核实仍未完成的事项。逾期事项排在前面，每条附课程、截止时间和来源。
 
 安装后可在宿主中分别设置每日和每周的触发时间。每周汇总通过插件的只读工具核对 Apple 提醒事项的完成状态。无法核实的项会标明状态待核实。[定时检查 Skill](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/prompt/hiqs-scheduled-review/SKILL.md)
@@ -42,6 +42,10 @@ HIQS_RUNTIME="$HOME/Library/Application Support/HIQS Course Mastery/0.2.0/venv"
 在 Codex 打开新聊天，试试这个问题：
 
 > 同步这门课的 Moodle 资料。找出下一份作业的截止时间、占分和提交要求，附上我能回查的出处。
+
+## 查阅 HKU 邮箱
+
+连接 Outlook Email 后，可按课程查邮件，并和 Moodle 公告一起核对考核和课务通知。每条邮件出处会附主题、发件人和时间，有邮件链接时也会附上。[连接 HKU 邮箱](hiqs-course-mastery-bundle/plugins/hiqs-course-mastery/README.md#连接-hku-邮箱)
 
 ## 查课件与同步 Apple 日程
 

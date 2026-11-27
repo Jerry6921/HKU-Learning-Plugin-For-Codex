@@ -2,7 +2,7 @@
 
 把香港大学 Moodle 课件同步到 Mac，再在 Codex 里查作业要求、复习讲义，或把已确认的课程截止日期加入 Apple 提醒事项与日历。查课程事实时，插件会回读本机资料，回答可附 Moodle 活动、文件及页码等出处。
 
-当前插件版本为 **0.2.2**。在 Codex 中显示为 **HIQS + Course Mastery**。
+当前插件版本为 **0.2.3**。在 Codex 中显示为 **HIQS + Course Mastery**。
 
 ## 快速开始
 
@@ -32,6 +32,14 @@ HIQS_RUNTIME="$HOME/Library/Application Support/HIQS Course Mastery/0.2.0/venv"
 
 > 同步这门课的 Moodle 资料。找出最新作业的截止时间、提交要求和占分，附上我可以回查的出处。
 
+### 连接 HKU 邮箱
+
+在 Codex 安装 Outlook Email，然后通过 Microsoft 登录并连接自己的 `@connect.hku.hk` 账户。学校的 Microsoft 管理设置可能要求审批。连接后，HIQS 可按课程搜索并回读邮件，引用邮件或与 Moodle 通知核对。
+
+> 查最近两周这门课的 Moodle 公告和 HKU 邮件，确认小测范围和截止日期，附上两个来源。
+
+[邮箱查阅规则](prompt/hiqs-course-information/references/hku-email.md) · [Outlook 连接与权限说明](https://help.openai.com/en/articles/12512241-outlook-email-and-calendar-apps-in-chatgpt)
+
 ### 连接 Apple 提醒事项和日历
 
 如需把课程安排同步给 Apple，在 macOS 14 或更新版本上准备 Swift 工具链，然后运行以下命令并按系统提示授权。
@@ -52,7 +60,7 @@ HIQS_RUNTIME="$HOME/Library/Application Support/HIQS Course Mastery/0.2.0/venv"
 
 ## 定时检查
 
-1. 每日静默同步一次 Moodle，发现新增作业、测验等事项时，当次通知并附来源。
+1. 每日静默同步 Moodle，并在任务已授权邮箱查阅时检查 HKU 邮件。发现新增作业、测验等事项时，当次通知并附来源。
 2. 每周汇总已确认截止日期、且核实未完成的事项。优先列出逾期项。
 
 每日和每周任务分别由宿主触发。每周输出前调用插件的只读工具核对 Apple 提醒事项的完成状态。无法核实时标明具体缺口。[定时检查 Skill](prompt/hiqs-scheduled-review/SKILL.md)

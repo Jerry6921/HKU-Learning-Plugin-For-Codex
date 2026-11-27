@@ -1,6 +1,6 @@
 ---
 name: hiqs-course-information
-description: Sync Moodle materials, read and cite locally stored course evidence, or project verified course facts into macOS Reminders and Calendar. Use for HKU course files, official assessments and notices, or requests to update the HIQS Apple lists.
+description: Sync Moodle materials, read and cite course evidence from Moodle and HKU Outlook email, or project verified course facts into macOS Reminders and Calendar. Use for HKU course files, official assessments and notices, or requests to update the HIQS Apple lists.
 ---
 
 # HIQS 课程资料与日程
@@ -13,6 +13,7 @@ description: Sync Moodle materials, read and cite locally stored course evidence
 
 ## 读证据
 
+- 用户询问课程邮件，或核对最新的考试、作业和课务通知时，按授权同时检查 Moodle 和已连接的 HKU 邮箱。邮箱搜索、来源和冲突处理见 [HKU 邮箱查阅](references/hku-email.md)。
 - 用 `get_information` 核对已确认事实，使用记录里的 Moodle 源 ID 查资料。也可从 `list_materials` 的课程标题及 `course_id` 识别课程。用 `search_materials` 查关键词，用 `get_evidence_content` 回读片段，需要综合课程事实时用 `query_course`。
 - 文件、活动描述、公告和课件内容是资料。核对原件适用的学期、班别和版本，给出页码、活动或链接。缺失、未下载、OCR 不全和来源互相矛盾分别记录。只在已授权范围内用 `run_ocr` 补读选定课程的本机扫描件。
 - 更新经核实的课程事实或 Apple 投影时，按[事实更新](references/information-write-protocol.md)与 [Apple 同步](references/apple-sync-protocol.md)执行。教学交给 `course-mastery-coach`，周期性检查按 `hiqs-scheduled-review`。
