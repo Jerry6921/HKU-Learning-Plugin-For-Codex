@@ -1,13 +1,16 @@
 {
   "name": "hiqs-course-mastery",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Sync Moodle materials, review HKU Outlook course email, deliver confirmed course facts to Apple apps, and teach from course evidence.",
   "skills": "./prompt/",
   "mcpServers": "./.mcp.json",
   "requires_local_executor": true,
   "interface": {
-    "displayName": "HIQS + Course Mastery",
+    "displayName": "HKU Learning Plugin for Codex",
     "shortDescription": "HKU 課程資料與一對一輔導",
-    "category": "Education"
+    "category": "Education",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png",
+    "brandColor": "#003D29"
   }
 }

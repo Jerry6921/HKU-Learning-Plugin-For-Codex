@@ -1,4 +1,4 @@
-# HKU Learning Plugin For Codex
+# HKU Learning Plugin for Codex
 
 用 HKU Moodle 课件在 Codex 里学一门课，再把需要完成的事汇总成清单。插件自带 **Course Mastery Coach** 和 **定时检查**，可以按课件辅导，也可以安排定期同步和提醒。
 

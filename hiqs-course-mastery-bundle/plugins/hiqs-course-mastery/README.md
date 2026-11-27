@@ -1,8 +1,8 @@
-# HKU Learning Plugin For Codex
+# HKU Learning Plugin for Codex
 
 把香港大学 Moodle 课件同步到 Mac，再在 Codex 里查作业要求、复习讲义，或把已确认的课程截止日期加入 Apple 提醒事项与日历。查课程事实时，插件会回读本机资料，回答可附 Moodle 活动、文件及页码等出处。
 
-当前插件版本为 **0.2.3**。在 Codex 中显示为 **HIQS + Course Mastery**。
+当前插件版本为 **0.2.4**。
 
 ## 快速开始
 
